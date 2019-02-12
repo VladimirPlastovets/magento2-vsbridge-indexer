@@ -19,7 +19,7 @@ class AttributeData
      *
      * @var array
      */
-    private $fieldsToRemove = [
+    private $fieldsToDelete = [
         'row_id',
         'created_in',
         'updated_in',
@@ -65,7 +65,7 @@ class AttributeData
     /**
      * @var SlugGenerator
      */
-    private $catalogHelper;
+    private $slugGenerator;
 
     /**
      * AttributeData constructor.
@@ -86,7 +86,7 @@ class AttributeData
         DataFilter $dataFilter
     ) {
         $this->settings = $configSettings;
-        $this->catalogHelper = $catalogHelper;
+        $this->slugGenerator = $catalogHelper;
         $this->attributeResourceModel = $attributeResource;
         $this->childrenResourceModel = $childrenResource;
         $this->dataFilter = $dataFilter;
@@ -191,7 +191,6 @@ class AttributeData
         $categoryDTO['id'] = (int)$categoryDTO['entity_id'];
         $categoryDTO = $this->addSlug($categoryDTO);
 
-        $categoryDTO = array_diff_key($categoryDTO, array_flip($this->fieldsToRemove));
         $categoryDTO = $this->filterData($categoryDTO);
 
         return $categoryDTO;
@@ -206,7 +205,7 @@ class AttributeData
     {
         if ($this->settings->useMagentoUrlKeys()) {
             if (!isset($categoryDTO['url_key'])) {
-                $slug = $this->catalogHelper->generate(
+                $slug = $this->slugGenerator->generate(
                     $categoryDTO['name'],
                     $categoryDTO['entity_id']
                 );
@@ -215,7 +214,7 @@ class AttributeData
 
             $categoryDTO['slug'] = $categoryDTO['url_key'];
         } else {
-            $slug = $this->catalogHelper->generate($categoryDTO['name'], $categoryDTO['entity_id']);
+            $slug = $this->slugGenerator->generate($categoryDTO['name'], $categoryDTO['entity_id']);
             $categoryDTO['slug'] = $slug;
         }
 
@@ -229,14 +228,6 @@ class AttributeData
      */
     private function filterData(array $categoryData)
     {
-        return $this->getDataFilter()->execute($categoryData);
-    }
-
-    /**
-     * @return DataFilter
-     */
-    private function getDataFilter()
-    {
-        return $this->dataFilter;
+        return $this->dataFilter->execute($categoryData, $this->fieldsToDelete);
     }
 }

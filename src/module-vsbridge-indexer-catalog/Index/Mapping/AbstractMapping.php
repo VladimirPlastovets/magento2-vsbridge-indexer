@@ -23,6 +23,7 @@ abstract class AbstractMapping
         'category_ids' => FieldInterface::TYPE_LONG,
         'sku' => FieldInterface::TYPE_KEYWORD,
         'url_key' => FieldInterface::TYPE_KEYWORD,
+        'children_count' => FieldInterface::TYPE_INTEGER,
     ];
 
     /**
@@ -162,7 +163,7 @@ abstract class AbstractMapping
             return true;
         }
 
-        if ($attribute->getSourceModel() == 'eav/entity_attribute_source_boolean') {
+        if ($attribute->getSourceModel() == \Magento\Catalog\Model\Product\Attribute\Source\Boolean::class) {
             return true;
         }
 

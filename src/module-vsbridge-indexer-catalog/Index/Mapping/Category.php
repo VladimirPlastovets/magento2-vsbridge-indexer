@@ -73,19 +73,16 @@ class Category extends AbstractMapping implements MappingInterface
     /**
      * @inheritdoc
      */
-    public function getMappingProperties()
+    public function getProperties()
     {
         if (null === $this->properties) {
-            $properties = [];
             $attributesMapping = $this->getAllAttributesMapping();
-
-            $properties['slug'] = ['type' => FieldInterface::TYPE_KEYWORD];
-            $properties = array_merge($properties, $this->generalMapping->getCommonProperties());
-            $properties['children_count'] = ['type' => FieldInterface::TYPE_INTEGER];
+            $properties = $this->generalMapping->getCommonProperties();
 
             $childMapping = $this->getChildrenDataMapping($attributesMapping, $properties);
             $properties['children_data'] = ['properties' => $childMapping];
 
+            $properties = array_merge($properties, $attributesMapping);
             /*TODO grid_per_page -> not implemented yet*/
             $properties['grid_per_page'] = ['type' => FieldInterface::TYPE_INTEGER];
             $mapping = ['properties' => $properties];

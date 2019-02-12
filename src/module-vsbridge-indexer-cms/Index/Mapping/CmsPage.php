@@ -71,7 +71,7 @@ class CmsPage implements MappingInterface
     /**
      * @inheritdoc
      */
-    public function getMappingProperties()
+    public function getProperties()
     {
         $properties = [
             'id' => ['type' => FieldInterface::TYPE_LONG],

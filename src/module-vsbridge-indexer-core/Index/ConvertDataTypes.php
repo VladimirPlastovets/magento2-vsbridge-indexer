@@ -39,7 +39,7 @@ class ConvertDataTypes implements ConvertDataTypesInterface
         $mapping = $type->getMapping();
 
         if ($mapping) {
-            $mappingProperties = $mapping->getMappingProperties()['properties'];
+            $mappingProperties = $mapping->getProperties()['properties'];
 
             foreach ($docs as $docId => $indexData) {
                 unset($indexData['entity_id']);

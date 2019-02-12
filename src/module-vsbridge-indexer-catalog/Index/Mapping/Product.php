@@ -68,11 +68,11 @@ class Product extends AbstractMapping implements MappingInterface
     /**
      * @inheritdoc
      */
-    public function getMappingProperties()
+    public function getProperties()
     {
         if (null === $this->properties) {
             $allAttributesMapping = $this->getAllAttributesMappingProperties();
-            $commonMappingProperties = $this->getCommonMappingProperties();
+            $commonMappingProperties = $this->getCommonProductProperties();
 
             $childrenMapping = $this->getChildrenAttributeMappings($allAttributesMapping);
             $childrenMapping = array_merge($childrenMapping, $commonMappingProperties);
@@ -123,7 +123,7 @@ class Product extends AbstractMapping implements MappingInterface
      *
      * @return array
      */
-    private function getChildrenAttributeMappings(array $allAttributes = [])
+    private function getChildrenAttributeMappings(array $allAttributes)
     {
         $list = [];
 
@@ -139,7 +139,7 @@ class Product extends AbstractMapping implements MappingInterface
     /**
      * @return array
      */
-    private function getCommonMappingProperties()
+    private function getCommonProductProperties()
     {
         $attributesMapping = [];
         $attributesMapping['stock']['properties'] = $this->generalMapping->getStockMapping();

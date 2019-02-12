@@ -110,7 +110,7 @@ class Attribute implements MappingInterface
     /**
      * @inheritdoc
      */
-    public function getMappingProperties()
+    public function getProperties()
     {
         $properties = [];
 

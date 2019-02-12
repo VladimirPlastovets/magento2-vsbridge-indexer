@@ -25,11 +25,6 @@ class AttributeData implements DataProviderInterface
     private $resourceModel;
 
     /**
-     * @var DataFilter
-     */
-    private $dataFilter;
-
-    /**
      * @var ConfigSettings
      */
     private $settings;
@@ -48,13 +43,11 @@ class AttributeData implements DataProviderInterface
     public function __construct(
         ConfigSettings $configSettings,
         SlugGenerator\Proxy $slugGenerator,
-        DataFilter $dataFilter,
         AttributeDataProvider $resourceModel
     ) {
         $this->slugGenerator = $slugGenerator;
         $this->settings = $configSettings;
         $this->resourceModel = $resourceModel;
-        $this->dataFilter = $dataFilter;
     }
 
     /**

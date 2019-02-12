@@ -174,7 +174,7 @@ class IndexOperations implements IndexOperationInterface
                 $this->client->putMapping(
                     $index->getName(),
                     $type->getName(),
-                    $mapping->getMappingProperties()
+                    $mapping->getProperties()
                 );
             }
         }

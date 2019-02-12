@@ -17,7 +17,7 @@ class SlugGenerator
      * @param string $name
      * @param int $id
      *
-     * @return mixed|null|string|string[]
+     * @return string
      */
     public function generate($name, $id)
     {

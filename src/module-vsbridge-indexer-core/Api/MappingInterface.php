@@ -28,5 +28,5 @@ interface MappingInterface
     /**
      * @return array
      */
-    public function getMappingProperties();
+    public function getProperties();
 }
